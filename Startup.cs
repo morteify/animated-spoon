@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using animated_spoon.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace animated_spoon
 {
@@ -26,7 +28,8 @@ namespace animated_spoon
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddTransient<IProductRepository, FakeProductRepository>();
+            services.AddTransient<IProductRepository, EFProductRepository>();
+            services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +58,8 @@ namespace animated_spoon
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+           //SeedData.EnsurePopulated(app);
         }
     }
 }

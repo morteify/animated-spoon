@@ -1,10 +1,16 @@
 ﻿@model IEnumerable<Product>
+
+<div>
+    @await Component.InvokeAsync("NavigationMenu")
+</div>
+
 @foreach (var product in Model)
 {
-    <div>
-        <h3>@product.Name</h3>
-        <h5>@product.Price.ToString("c")</h5>
-        @product.Description
-        <hr />
-    </div>
+<div>
+    <h3>@product.Name</h3>
+    <h5>@product.Price.ToString("c")</h5>
+    <h5>@product.Category</h5>
+    @product.Description
+    <hr />
+</div>
 }

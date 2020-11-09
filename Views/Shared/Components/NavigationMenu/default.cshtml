@@ -1,0 +1,26 @@
+﻿@model IEnumerable<string>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Choose a category
+        </button>
+       
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      
+                <a class="dropdown-item"
+                   asp-action="Index"
+                   asp-controller="Product"
+                   >
+                   All
+                </a>
+
+            @foreach (var category in Model)
+            {
+                <a class="dropdown-item"
+                   asp-route="products"
+                   asp-route-category="@category">
+                    @category
+                </a>
+            }
+        </div>
+    </div>

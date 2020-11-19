@@ -20,7 +20,7 @@ namespace animated_spoon.Migrations
 
             modelBuilder.Entity("animated_spoon.Models.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -40,7 +40,7 @@ namespace animated_spoon.Migrations
                     b.Property<int>("ProductCategoryId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProductId");
 
                     b.HasIndex("ProductCategoryId");
 
@@ -59,7 +59,7 @@ namespace animated_spoon.Migrations
 
                     b.HasKey("ProductCategoryId");
 
-                    b.ToTable("ProductCategories");
+                    b.ToTable("ProductsCategories");
                 });
 
             modelBuilder.Entity("animated_spoon.Models.Product", b =>

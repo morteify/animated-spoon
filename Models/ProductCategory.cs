@@ -9,6 +9,9 @@ namespace animated_spoon.Models
 {
     public class ProductCategory
     {
+        [Key]
+        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductCategoryId { get; set; }
         public string Name { get; set; }
 

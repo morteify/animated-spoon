@@ -9,7 +9,7 @@ using animated_spoon.Data;
 namespace animated_spoon.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20201119012329_InitialCreate")]
+    [Migration("20201119111642_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,7 +22,7 @@ namespace animated_spoon.Migrations
 
             modelBuilder.Entity("animated_spoon.Models.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -42,7 +42,7 @@ namespace animated_spoon.Migrations
                     b.Property<int>("ProductCategoryId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProductId");
 
                     b.HasIndex("ProductCategoryId");
 
@@ -61,7 +61,7 @@ namespace animated_spoon.Migrations
 
                     b.HasKey("ProductCategoryId");
 
-                    b.ToTable("ProductCategories");
+                    b.ToTable("ProductsCategories");
                 });
 
             modelBuilder.Entity("animated_spoon.Models.Product", b =>

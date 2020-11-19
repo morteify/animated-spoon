@@ -15,5 +15,9 @@ namespace animated_spoon.Models
         [Column(TypeName = "decimal(18,4)")]
         public decimal Price { get; set; }
         public string Category { get; set; }
+
+
+        public int ProductCategoryId { get; set; }
+        public ProductCategory ProductCategory { get; set; }
     }
 }

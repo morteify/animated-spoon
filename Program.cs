@@ -21,7 +21,7 @@ namespace animated_spoon
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                    webBuilder
-                    //.UseDefaultServiceProvider(options => options.ValidateScopes = false)
+                    .UseDefaultServiceProvider(options => options.ValidateScopes = false)
                     .UseStartup<Startup>();
                 });
     }

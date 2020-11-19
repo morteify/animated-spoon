@@ -72,7 +72,7 @@ namespace animated_spoon
                 );
             });
 
-           //SeedData.EnsurePopulated(app);
+           SeedData.EnsurePopulated(app);
         }
     }
 }

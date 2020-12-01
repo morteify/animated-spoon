@@ -21,7 +21,7 @@ namespace animated_spoon.Components
         public IViewComponentResult Invoke()
         {
             ViewBag.SelectedCategory = RouteData?.Values["category"];
-            return View(db.Products.Select(product => product.Category).Distinct().OrderBy(product => product));
+            return View(db.ProductsCategories.Select(category => category.Name).Distinct().OrderBy(product => product));
         }
     }
 }

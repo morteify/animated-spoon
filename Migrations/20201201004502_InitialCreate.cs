@@ -28,8 +28,7 @@ namespace animated_spoon.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProductCategoryId = table.Column<int>(type: "int", nullable: false)
+                    ProductCategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -39,7 +38,7 @@ namespace animated_spoon.Migrations
                         column: x => x.ProductCategoryId,
                         principalTable: "ProductsCategories",
                         principalColumn: "ProductCategoryId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

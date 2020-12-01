@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace animated_spoon.Models
 {
@@ -14,7 +15,7 @@ namespace animated_spoon.Models
         {
             context = ctx;
         }
-
-        public IQueryable<Product> Products => context.Products;
+        
+        public IQueryable<Product> Products => context.Products.Include(entity => entity.ProductCategory);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,10 +15,12 @@ namespace animated_spoon.Models
 
         [Column(TypeName = "decimal(18,4)")]
         public decimal Price { get; set; }
-        public string Category { get; set; }
+  
+        [ForeignKey("ProductCategoryId")]
+        public int? ProductCategoryId { get; set; }
 
-        public int ProductCategoryId { get; set; }
-        public ProductCategory ProductCategory { get; set; }
+        [DisplayFormat(NullDisplayText = "No category")]
+        public virtual ProductCategory ProductCategory { get; set; }
 
     }
 }

@@ -18,12 +18,13 @@ namespace animated_spoon.Controllers
 
         public ViewResult List(string category)  
         {
-            return View(productRepository.Products.Where(product => product.Category == category));
+            return View(productRepository.Products.Where(product => product.ProductCategory.Name == category));
         }
 
         [Route("products")]
         public IActionResult Index()
         {
+            //var products = productRepository.Products
             return View("List", productRepository.Products);
         }
 

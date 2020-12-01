@@ -21,15 +21,15 @@ namespace animated_spoon.Models
                 context.ProductsCategories.AddRange(
                     new ProductCategory
                     {
-                        Name = "Test 1"
+                        Name = "Category 1"
                     },
                     new ProductCategory
                     {
-                        Name = "Test 2"
+                        Name = "Category 2"
                     },
                     new ProductCategory
                     {
-                        Name = "Test 3"
+                        Name = "Category 3"
                     }
                 );
             }
@@ -43,7 +43,6 @@ namespace animated_spoon.Models
                     {
                         Name = "Kayak",
                         Description = "A boat for one person",
-                        Category = "Watersports",
                         Price = 275,
                         ProductCategoryId = 1,
                     },
@@ -51,23 +50,20 @@ namespace animated_spoon.Models
                     {
                         Name = "Lifejacket",
                         Description = "Protective and fashionable",
-                        Category = "Watersports",
                         Price = 48.95m,
-                        ProductCategoryId = 1,
+                        ProductCategoryId = 2,
                     },
                     new Product
                     {
                         Name = "Soccer Ball",
                         Description = "FIFA-approved size and weight",
-                        Category = "Soccer",
                         Price = 19.50m,
-                        ProductCategoryId = 1,
+                        ProductCategoryId = 3,
                     },
                     new Product
                     {
                         Name = "Corner Flags",
                         Description = "Give your playing field a professional touch",
-                        Category = "Soccer",
                         Price = 34.95m,
                         ProductCategoryId = 1,
                     },
@@ -75,31 +71,27 @@ namespace animated_spoon.Models
                     {
                         Name = "Stadium",
                         Description = "Flat-packed 35,000-seat stadium",
-                        Category = "Soccer",
                         Price = 79500,
-                        ProductCategoryId = 1,
+                        ProductCategoryId = 3,
                     },
                     new Product
                     {
                         Name = "Thinking Cap",
                         Description = "Improve brain efficiency by 75%",
-                        Category = "Chess",
                         Price = 16,
-                        ProductCategoryId = 1,
+                        ProductCategoryId = 2,
                     },
                     new Product
                     {
                         Name = "Unsteady Chair",
                         Description = "Secretly give your opponent a disadvantage",
-                        Category = "Chess",
                         Price = 29,
-                        ProductCategoryId = 1,
+                        ProductCategoryId = 2,
                     },
                     new Product
                     {
                         Name = "Human Chess Board",
                         Description = "A fun game for the family",
-                        Category = "Chess",
                         Price = 75,
                         ProductCategoryId = 1,
                     },
@@ -107,7 +99,6 @@ namespace animated_spoon.Models
                     {
                         Name = "Bling-Bling King",
                         Description = "Gold-plated, diamond-studded King",
-                        Category = "Chess",
                         Price = 1200,
                         ProductCategoryId = 1,
                     }

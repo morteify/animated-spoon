@@ -29,7 +29,7 @@ namespace animated_spoon
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddTransient<IProductRepository, EFProductRepository>();
-            services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductContext")));
+            services.AddDbContext<ProductDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ProductContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -15,7 +15,18 @@ namespace animated_spoon.Models
         {
             context = ctx;
         }
-        
+
         public IQueryable<Product> Products => context.Products.Include(entity => entity.ProductCategory);
+
+        public void SaveProduct(Product product)
+        {
+            context.Products.Add(product);
+        }
+
+        public void DeleteProduct(string productId)
+        {
+            Product product = context.Products.Find(productId);
+            context.Products.Remove(product);
+        }
     }
 }

@@ -26,8 +26,8 @@ namespace animated_spoon.Migrations
                 {
                     ProductId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
+                    Description = table.Column<string>(type: "character varying(180)", maxLength: 180, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
                     ProductCategoryId = table.Column<int>(type: "integer", nullable: true)
                 },

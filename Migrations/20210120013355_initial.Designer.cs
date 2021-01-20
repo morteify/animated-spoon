@@ -10,7 +10,7 @@ using animated_spoon.Data;
 namespace animated_spoon.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20210119020834_initial")]
+    [Migration("20210120013355_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,10 +29,14 @@ namespace animated_spoon.Migrations
                         .UseIdentityByDefaultColumn();
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(180)
+                        .HasColumnType("character varying(180)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,4)");

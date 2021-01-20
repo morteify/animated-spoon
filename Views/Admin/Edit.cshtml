@@ -1,0 +1,33 @@
+@model Product
+
+<h1>Edit</h1>
+
+<div>
+    @await Component.InvokeAsync("NavigationMenu")
+</div>
+
+
+<form asp-action="Edit">
+  <input type="hidden" asp-for="ProductId" />
+  <div class="mb-3">
+    <label for="productName" class="form-label">Name</label>
+      <div><span asp-validation-for="Name" class="text-danger"></span></div>
+    <input type="text" asp-for="Name" class="form-control" id="productName" aria-describedby="emailHelp" placeholder="@Model.Name">
+  </div>
+  <div class="mb-3">
+    <label for="productPrice" class="form-label">Price</label>
+      <div><span asp-validation-for="Price" class="text-danger"></span></div>
+    <input type="number" asp-for="Price" class="form-control" id="productPrice" aria-describedby="productPrice" placeholder="@Model.Price">
+  </div>
+  <div class="mb-3">
+    <label for="productCategory" class="form-label">Category</label>
+    <div><span asp-validation-for="ProductCategory" class="text-danger"></span></div>
+    <input type="text" asp-for="ProductCategory" class="form-control" id="productPrice" aria-describedby="productCategory" placeholder="@Model.ProductCategory">
+  </div>
+  <div class="mb-3">
+    <label for="productDescription" class="form-label">Description</label>
+      <div><span asp-validation-for="Description" class="text-danger"></span></div>
+    <input type="text" asp-for="Description" class="form-control" id="productPrice" aria-describedby="productDescription" placeholder="@Model.Description">
+  </div>
+  <button type="submit" class="btn btn-primary" method="post" >Submit</button>
+</form>

@@ -1,0 +1,24 @@
+@model IEnumerable<Product>
+
+@{
+    ViewBag.Title = "All Products";
+    Layout = "_AdminLayout";
+}
+
+<div>
+    @await Component.InvokeAsync("NavigationMenu")
+</div>
+
+@foreach (var product in Model)
+{
+<div>
+    <h3>@product.Name</h3>
+    <h5>@product.Price.ToString("c")</h5>
+    <h5>Category: @(product?.ProductCategory?.Name)</h5>
+    @product.Description
+    <br />
+    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@product.ProductId">Delete</a>
+    <a type="button" class="btn btn-secondary" asp-action="Edit" asp-route-id="@product.ProductId">Edit</a>
+    <hr />
+</div>
+}

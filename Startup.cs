@@ -58,7 +58,7 @@ namespace animated_spoon
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                
+
                 endpoints.MapControllerRoute(
                    name: "products",
                    pattern: "products/{category?}",
@@ -70,9 +70,23 @@ namespace animated_spoon
                    pattern: "products/{action=Index}",
                    defaults: new { controller = "Product", action = "Index" }
                 );
+
+                // ADMIN
+
+                endpoints.MapControllerRoute(
+                   name: "admin",
+                   pattern: "admin/products/{action=Index}",
+                   defaults: new { controller = "Admin", action = "Index" }
+                );
+
+                endpoints.MapControllerRoute(
+                name: "admin",
+                pattern: "admin/product/{id}/{action=Edit}",
+                defaults: new { controller = "Admin", action = "Edit", id = 1 }
+   );
             });
 
-           SeedData.EnsurePopulated(app);
+            SeedData.EnsurePopulated(app);
         }
     }
 }

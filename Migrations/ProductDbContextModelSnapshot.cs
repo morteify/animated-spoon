@@ -27,10 +27,14 @@ namespace animated_spoon.Migrations
                         .UseIdentityByDefaultColumn();
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(180)
+                        .HasColumnType("character varying(180)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,4)");

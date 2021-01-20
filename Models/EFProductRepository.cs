@@ -23,10 +23,11 @@ namespace animated_spoon.Models
             context.Products.Add(product);
         }
 
-        public void DeleteProduct(string productId)
+        public Product DeleteProduct(int productId)
         {
-            Product product = context.Products.Find(productId);
+            Product product = context.Products.FirstOrDefault(p => p.ProductId == productId);
             context.Products.Remove(product);
+            return product;
         }
     }
 }

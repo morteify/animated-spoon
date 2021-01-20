@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using animated_spoon.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace animated_spoon.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private IProductRepository productRepository;

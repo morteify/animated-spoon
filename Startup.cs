@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using animated_spoon.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace animated_spoon
 {
@@ -30,6 +32,7 @@ namespace animated_spoon
             services.AddRazorPages();
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddDbContext<ProductDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ProductContext")));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ProductDbContext>().AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,11 +50,9 @@ namespace animated_spoon
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
+            app.UseAuthentication();
             app.UseEndpoints(endpoints =>
             {
 
@@ -71,8 +72,6 @@ namespace animated_spoon
                    defaults: new { controller = "Product", action = "Index" }
                 );
 
-                // ADMIN
-
                 endpoints.MapControllerRoute(
                    name: "admin",
                    pattern: "admin/products/{action=Index}",
@@ -80,10 +79,16 @@ namespace animated_spoon
                 );
 
                 endpoints.MapControllerRoute(
-                name: "admin",
-                pattern: "admin/product/{id}/{action=Edit}",
-                defaults: new { controller = "Admin", action = "Edit", id = 1 }
-   );
+                    name: "admin",
+                    pattern: "admin/product/{id}/{action=Edit}",
+                    defaults: new { controller = "Admin", action = "Edit", id = 1 }
+                );
+
+                endpoints.MapControllerRoute(
+                    name: "account",
+                    pattern: "account/{action=Login}",
+                    defaults: new { controller = "Account", action = "Login" }
+                );
             });
 
             SeedData.EnsurePopulated(app);

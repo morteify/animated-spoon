@@ -13,26 +13,40 @@ using animated_spoon.Models;
 
 namespace animated_spoon.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private UserManager<IdentityUser> userManager;
         private SignInManager<IdentityUser> signInManager;
+        private IProductRepository productRepository;
 
+
+        private const string adminUser = "admin";
+        private const string adminPassword = "Test123!";
         public AccountController(UserManager<IdentityUser> userManager,
-                SignInManager<IdentityUser> signInManager)
+        SignInManager<IdentityUser> signInManager)
         {
             this.signInManager = signInManager;
-            this.signInManager = signInManager;
+            this.userManager = userManager;
+            this.EnsurePopulated();
+
         }
 
+        public async void EnsurePopulated()
+        {
+            IdentityUser user = await this.userManager.FindByNameAsync(adminUser);
+            if (user == null)
+            {
+                user = new IdentityUser("admin");
+                await this.userManager.CreateAsync(user, adminPassword);
+            }
+        }
 
+        [HttpGet]
         [AllowAnonymous]
         public ViewResult Login(string returnUrl)
         {
-            return View(new LoginViewModel
-            {
-                ReturnUrl = returnUrl
-            });
+            return View();
         }
 
         [HttpPost]
@@ -44,13 +58,15 @@ namespace animated_spoon.Controllers
             {
                 IdentityUser user =
                     await userManager.FindByNameAsync(loginModel.Name);
+
                 if (user != null)
                 {
-                    await signInManager.SignOutAsync();
-                    if ((await signInManager.PasswordSignInAsync(user,
-                            loginModel.Password, false, false)).Succeeded)
+                    var result = await signInManager.PasswordSignInAsync(user,
+                            loginModel.Password, false, false);
+
+                    if (result.Succeeded)
                     {
-                        return Redirect(loginModel?.ReturnUrl ?? "/Admin/Login");
+                        return Redirect("/Admin/Products");
                     }
                 }
             }
@@ -58,10 +74,10 @@ namespace animated_spoon.Controllers
             return View(loginModel);
         }
 
-        public async Task<RedirectResult> Logout(string returnUrl = "/")
+        public async Task<RedirectResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return Redirect(returnUrl);
+            return Redirect("/Products");
         }
 
 

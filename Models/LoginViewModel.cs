@@ -11,6 +11,4 @@ public class LoginViewModel
     [Required]
     [UIHint("password")]
     public string Password { get; set; }
-
-    public string ReturnUrl { get; set; } = "/";
 }

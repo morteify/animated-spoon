@@ -1,25 +1,20 @@
 @model LoginViewModel
 @{
     ViewBag.Title = "Log In";
-    Layout = "_AdminLayout";
 }
 
 <div class="text-danger" asp-validation-summary="All"></div>
 
 <form asp-action="Login" asp-controller="Account" method="post">
-  <input type="hidden" asp-for="ReturnUrl" />
+
   <div class="mb-3">
     <label asp-for="Name"></label>
-    <input type="text" class="form-control" asp-for="Name" aria-describedby="emailHelp">
+    <input type="text" class="form-control" asp-for="Name" aria-describedby="Username">
   </div>
   <div class="mb-3">
     <label asp-for="Password"></label>
     <div><span asp-validation-for="Password" class="text-danger"></span></div>
     <input type="password" class="form-control" asp-for="Password">
-  </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

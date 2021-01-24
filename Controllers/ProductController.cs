@@ -16,10 +16,12 @@ namespace animated_spoon.Controllers
             this.productRepository = productRepository;
         }
 
+        [HttpGet]
         public ViewResult List(string category)
         {
             return View(productRepository.Products.Where(product => product.ProductCategory.Name == category));
         }
+
 
         [HttpGet]
         [Route("products/item/{productId:int}")]
@@ -28,6 +30,7 @@ namespace animated_spoon.Controllers
             return View("List", productRepository.Products.Where(p => p.ProductId == productId));
         }
 
+        [HttpGet]
         [Route("products")]
         public IActionResult Index()
         {

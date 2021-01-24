@@ -9,7 +9,7 @@ using animated_spoon.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using animated_spoon.Models;
+
 
 namespace animated_spoon.Controllers
 {

@@ -34,7 +34,6 @@ namespace animated_spoon.Controllers
         [Route("products")]
         public IActionResult Index()
         {
-            //var products = productRepository.Products
             return View("List", productRepository.Products);
         }
 

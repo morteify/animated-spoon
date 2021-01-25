@@ -20,14 +20,35 @@ namespace animated_spoon.Models
 
         public void SaveProduct(Product product)
         {
-            context.Products.Add(product);
+            if (product.ProductId == 0)
+            {
+                context.Products.Add(product);
+            }
+            else
+            {
+                Product dbEntry = context.Products
+                    .FirstOrDefault(p => p.ProductId == product.ProductId);
+                if (dbEntry != null)
+                {
+                    dbEntry.Name = product.Name;
+                    dbEntry.Description = product.Description;
+                    dbEntry.Price = product.Price;
+                    dbEntry.ProductCategory = product.ProductCategory;
+                }
+            }
+            context.SaveChanges();
         }
 
         public Product DeleteProduct(int productId)
         {
-            Product product = context.Products.FirstOrDefault(p => p.ProductId == productId);
-            context.Products.Remove(product);
-            return product;
+            Product dbEntry = context.Products
+               .FirstOrDefault(p => p.ProductId == productId);
+            if (dbEntry != null)
+            {
+                context.Products.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
         }
     }
 }

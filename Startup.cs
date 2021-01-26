@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
-
+using SignalRChat.Hubs;
 
 namespace animated_spoon
 {
@@ -38,6 +38,7 @@ namespace animated_spoon
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
             services.AddRazorPages();
+            services.AddSignalR();
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddDbContext<ProductDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ProductContext")));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ProductDbContext>().AddDefaultTokenProviders();
@@ -96,7 +97,7 @@ namespace animated_spoon
             });
             app.UseEndpoints(endpoints =>
             {
-
+                endpoints.MapHub<ChatHub>("/chathub");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

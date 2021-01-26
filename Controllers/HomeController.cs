@@ -31,6 +31,13 @@ namespace animated_spoon.Controllers
         }
 
         [HttpGet]
+        public IActionResult Chathub()
+        {
+            return View("Views/Chathub/Index.cshtml");
+        }
+
+
+        [HttpGet]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -35,7 +35,7 @@ namespace animated_spoon.Controllers
                 ProductCategoryName = product.ProductCategory.Name,
                 ProductId = product.ProductId,
             });
-            return Ok(product.ToList());
+            return Ok(product);
         }
 
 

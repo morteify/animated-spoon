@@ -12,9 +12,9 @@ namespace animated_spoon.Models
         [Key]
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ProductCategoryId { get; set; }
-        public string Name { get; set; }
+        public virtual int ProductCategoryId { get; set; }
+        public virtual string Name { get; set; }
 
-        public ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

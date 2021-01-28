@@ -20,13 +20,13 @@ namespace animated_spoon.Controllers
             this.productRepository = productRepository;
         }
 
-        public ViewResult Index() => View(productRepository.Products);
+        public ViewResult Index() => View(productRepository.GetProducts());
 
         [HttpGet]
         [Route("admin/edit/{productId:int}")]
         public ViewResult Edit(int productId)
         {
-            var product = productRepository.Products.FirstOrDefault((product) => product.ProductId == productId);
+            var product = productRepository.GetProducts().FirstOrDefault((product) => product.ProductId == productId);
             return View(product);
         }
 

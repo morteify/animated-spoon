@@ -7,8 +7,8 @@ namespace animated_spoon.Models
 {
     public interface IProductRepository
     {
-        IQueryable<Product> Products { get; }
+        IQueryable<Product> GetProducts();
         Product DeleteProduct(int productId);
-        void SaveProduct(Product product);
+        Product SaveProduct(Product product);
     }
 }

@@ -16,13 +16,20 @@ namespace animated_spoon.Models
             context = ctx;
         }
 
-        public IQueryable<Product> Products => context.Products.Include(entity => entity.ProductCategory);
+        public EFProductRepository() { }
 
-        public void SaveProduct(Product product)
+        public virtual IQueryable<Product> GetProducts()
+        {
+            return context.Products.Include(entity => entity.ProductCategory);
+        }
+
+        public virtual Product SaveProduct(Product product)
         {
             if (product.ProductId == 0)
             {
                 context.Products.Add(product);
+                context.SaveChanges();
+                return product;
             }
             else
             {
@@ -35,11 +42,12 @@ namespace animated_spoon.Models
                     dbEntry.Price = product.Price;
                     dbEntry.ProductCategory = product.ProductCategory;
                 }
+                context.SaveChanges();
+                return dbEntry;
             }
-            context.SaveChanges();
         }
 
-        public Product DeleteProduct(int productId)
+        public virtual Product DeleteProduct(int productId)
         {
             Product dbEntry = context.Products
                .FirstOrDefault(p => p.ProductId == productId);

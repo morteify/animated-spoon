@@ -19,7 +19,7 @@ namespace animated_spoon.Controllers
         [HttpGet]
         public ViewResult List(string category)
         {
-            return View(productRepository.Products.Where(product => product.ProductCategory.Name == category));
+            return View(productRepository.GetProducts().Where(product => product.ProductCategory.Name == category));
         }
 
 
@@ -27,14 +27,14 @@ namespace animated_spoon.Controllers
         [Route("products/item/{productId:int}")]
         public ViewResult Item(int productId)
         {
-            return View("List", productRepository.Products.Where(p => p.ProductId == productId));
+            return View("List", productRepository.GetProducts().Where(p => p.ProductId == productId));
         }
 
         [HttpGet]
         [Route("products")]
         public IActionResult Index()
         {
-            return View("List", productRepository.Products);
+            return View("List", productRepository.GetProducts());
         }
 
     }

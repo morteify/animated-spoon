@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using animated_spoon.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Docs.Samples;
+using Microsoft.AspNetCore.Http;
 
 namespace animated_spoon.Controllers
 {
@@ -18,15 +19,18 @@ namespace animated_spoon.Controllers
             this.productRepository = productRepository;
         }
 
-
         /// <summary>
-        /// Returns a list of all products from a specific category.
+        /// Returns all products.
         /// </summary>
-        /// <param name="categoryId"></param>  
-        [HttpGet("products/category/{categoryId}")]
-        public ActionResult<List<Product>> ProductsList(int categoryId)
+        [HttpGet("products")]
+        public ActionResult<List<ProductApiDTO>> Products()
         {
-            var product = productRepository.Products.Where(product => product.ProductCategory.ProductCategoryId == categoryId).Select(product => new ProductApiDTO()
+            var products = productRepository.GetProducts();
+
+            if (products.ToList().Count == 0 || products == null)
+                return NotFound();
+
+            return products.Select(product => new ProductApiDTO()
             {
                 Description = product.Description,
                 Name = product.Name,
@@ -34,19 +38,20 @@ namespace animated_spoon.Controllers
                 ProductCategoryId = product.ProductCategory.ProductCategoryId,
                 ProductCategoryName = product.ProductCategory.Name,
                 ProductId = product.ProductId,
-            });
-            return Ok(product);
+            }).ToList();
         }
-
 
         /// <summary>
         /// Returns a specific product by its ID.
         /// </summary>
         /// <param name="productId"></param>  
         [HttpGet("products/item/{productId:int}")]
-        public ActionResult<Product> ProductItem(int productId)
+        public ActionResult<ProductApiDTO> ProductItem(int productId)
         {
-            var product = productRepository.Products.Where(p => p.ProductId == productId).Select(product => new ProductApiDTO()
+            var productItem = productRepository.GetProducts().Where(p => p.ProductId == productId);
+            if (productItem.ToList().Count == 0 || productItem == null) return NotFound();
+
+            var product = productItem.Select(product => new ProductApiDTO()
             {
                 Description = product.Description,
                 Name = product.Name,
@@ -55,49 +60,74 @@ namespace animated_spoon.Controllers
                 ProductCategoryName = product.ProductCategory.Name,
                 ProductId = product.ProductId,
             });
-            return Ok(product);
+
+            return product.FirstOrDefault();
         }
 
         /// <summary>
-        /// Returns all products.
+        /// Returns a list of all products from a specific category.
         /// </summary>
-        [HttpGet("products")]
-        public ActionResult Products()
+        /// <param name="categoryId"></param>  
+        [HttpGet("products/category/{categoryId}")]
+        public ActionResult<List<ProductApiDTO>> ProductsList(int categoryId)
         {
-            return Ok(productRepository.Products.Select(product => new ProductApiDTO()
+            try
             {
-                Description = product.Description,
-                Name = product.Name,
-                Price = product.Price,
-                ProductCategoryId = product.ProductCategory.ProductCategoryId,
-                ProductCategoryName = product.ProductCategory.Name,
-                ProductId = product.ProductId,
-            }).ToList());
+                var productsByCategory = productRepository.GetProducts().Where(product => product.ProductCategoryId == categoryId);
+
+                if (productsByCategory.ToList().Count == 0)
+                    return NotFound();
+
+                var products = productsByCategory.Select(product => new ProductApiDTO()
+                {
+                    Description = product.Description,
+                    Name = product.Name,
+                    Price = product.Price,
+                    ProductCategoryId = product.ProductCategory.ProductCategoryId,
+                    ProductCategoryName = product.ProductCategory.Name,
+                    ProductId = product.ProductId,
+                });
+                return products.ToList();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
+
+
+        /// <summary>
+        /// Adds a new product in the database.
+        /// </summary>
+        [HttpPost("products/add")]
+        public ActionResult<Product> AddProduct(Product newProduct)
+        {
+            var product = productRepository.SaveProduct(newProduct);
+            return product;
+        }
+
 
         /// <summary>
         /// Updates an existing product in the database.
         /// </summary>
-        [HttpPut("products/add")]
-        public IActionResult AddProject(Product newProject)
+        [HttpPut("products/update")]
+        public ActionResult<Product> UpdateProduct(Product newProduct)
         {
-
-            productRepository.SaveProduct(newProject);
-            return Ok();
-
+            var product = productRepository.SaveProduct(newProduct);
+            return product;
         }
 
         /// <summary>
-        /// Updates an existing product in the database.
+        /// Remove a selected product from the database.
         /// </summary>
         /// <param name="productId"></param>  
         [HttpDelete("products/delete/{productId}")]
-        public IActionResult DeleteProject(int productId)
+        public ActionResult<Product> DeleteProduct(int productId)
         {
-
-            productRepository.DeleteProduct(productId);
-            return Ok();
-
+            var deletedProduct = productRepository.DeleteProduct(productId);
+            if (deletedProduct == null)
+                return NotFound();
+            return deletedProduct;
         }
 
     }

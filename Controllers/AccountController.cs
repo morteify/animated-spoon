@@ -77,7 +77,7 @@ namespace animated_spoon.Controllers
         public async Task<RedirectResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return Redirect("/Products");
+            return Redirect("/home");
         }
 
 

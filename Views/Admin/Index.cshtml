@@ -2,23 +2,35 @@
 
 @{
     ViewBag.Title = "All Products";
-    Layout = "_AdminLayout";
+    Layout = "_Layout";
 }
 
-<div>
-    @await Component.InvokeAsync("NavigationMenu")
-</div>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Category</th>
+      <th scope="col">Description</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  @foreach (var product in Model)
+        {
+        <tr>
+            <th scope="row">@product.ProductId</th>
+            <td>@product.Name</td>
+            <td>@product.Price.ToString("C")</td>
+            <td>@(product?.ProductCategory?.Name)</td>
+            <td>@product.Description</td>
+            <td><a type="button" class="btn btn-secondary" asp-action="Edit" asp-route-id="@product.ProductId">Edit</a></td>
+            <td> <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@product.ProductId">Delete</a></td>
+        </tr>
+        }
+  </tbody>
+</table>
 
-@foreach (var product in Model)
-{
-<div>
-    <h3>@product.Name</h3>
-    <h5>@product.Price.ToString("c")</h5>
-    <h5>Category: @(product?.ProductCategory?.Name)</h5>
-    @product.Description
-    <br />
-    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@product.ProductId">Delete</a>
-    <a type="button" class="btn btn-secondary" asp-action="Edit" asp-route-id="@product.ProductId">Edit</a>
-    <hr />
-</div>
-}
+

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using animated_spoon.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace animated_spoon.Controllers
 {
@@ -20,8 +21,10 @@ namespace animated_spoon.Controllers
             this.productRepository = productRepository;
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         public ViewResult Index() => View(productRepository.GetProducts());
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         [Route("admin/edit/{productId:int}")]
         public ViewResult Edit(int productId)
@@ -30,6 +33,21 @@ namespace animated_spoon.Controllers
             return View(product);
         }
 
+
+
+        [ApiExplorerSettings(IgnoreApi = true)]
+        [HttpGet]
+        [Route("Admin/AddNewProduct")]
+        public ViewResult AddNewProduct()
+        {
+            var maxId = productRepository.GetProducts().Select(product => product.ProductId).Max() + 1;
+            var newProduct = new Product { ProductId = 0 };
+            return View("Edit", newProduct);
+        }
+
+
+
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPost]
         public IActionResult Edit(Product product)
         {
@@ -45,8 +63,10 @@ namespace animated_spoon.Controllers
             }
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         public ViewResult Create() => View("Edit", new Product());
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         [Route("admin/delete/{productId:int}")]
         public IActionResult Delete(int productId)

@@ -15,21 +15,21 @@ namespace animated_spoon.Controllers
         {
             this.productRepository = productRepository;
         }
-
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         public ViewResult List(string category)
         {
             return View(productRepository.GetProducts().Where(product => product.ProductCategory.Name == category));
         }
 
-
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         [Route("products/item/{productId:int}")]
         public ViewResult Item(int productId)
         {
             return View("List", productRepository.GetProducts().Where(p => p.ProductId == productId));
         }
-
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         [Route("products")]
         public IActionResult Index()

@@ -17,24 +17,26 @@ namespace animated_spoon.Controllers
         {
             _logger = logger;
         }
-
-        [Route("home/")]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        [Route("Home/")]
         public IActionResult Index()
         {
             return View();
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Chathub()
         {
             return View("Views/Chathub/Index.cshtml");
         }
 
-
+        [ApiExplorerSettings(IgnoreApi = true)]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

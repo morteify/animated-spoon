@@ -1,10 +1,19 @@
 @model IEnumerable<Product>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewBag.Title = "All Products";
     Layout = "_Layout";
 }
 
+<div>
+    @if (@User.Identity.Name == "Admin") {
+        <a type="button" class="btn btn-secondary" asp-controller="Admin" asp-action="AddNewProduct">Add new</a>
+     }
+</div>
+<br />
 <table class="table">
   <thead class="thead-dark">
     <tr>

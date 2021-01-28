@@ -18,9 +18,10 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                       <li class="nav-item">
+                            <a class="nav-link text-dark" href="/">Swagger</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
@@ -40,15 +41,13 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            <p style="display:inline-block;" id="visitorsCounter">0</p> visitor(s) on the page <br />
-
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - animated_spoon - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2021 - animated_spoon -  <p style="display:inline-block;" id="visitorsCounter">0</p> visitor(s) on the page <br />
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

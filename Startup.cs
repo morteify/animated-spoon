@@ -93,6 +93,7 @@ namespace animated_spoon
             {
                 endpoints.MapHub<ChatHub>("/chathub");
                 endpoints.MapHub<VisitorsCounterHub>("/visitorsCounter");
+                endpoints.MapHub<ProductGroupHub>("/productGroup");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -18,7 +18,6 @@ namespace animated_spoon.Controllers
             _logger = logger;
         }
         [ApiExplorerSettings(IgnoreApi = true)]
-        [Route("Home/")]
         public IActionResult Index()
         {
             return View();

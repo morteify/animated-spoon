@@ -1,6 +1,7 @@
 @model Product
 
 <h1>Edit</h1>
+<p style="display:inline-block;" id="productGroupAnchor">0</p> people are editing this product<br />
 
 <form asp-action="Edit">
   <input type="hidden" asp-for="ProductId" />
@@ -26,3 +27,6 @@
   </div>
   <button type="submit" class="btn btn-primary" method="post">Submit</button>
 </form>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/productGroup.js"></script>

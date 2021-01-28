@@ -49,18 +49,12 @@ namespace animated_spoon
                         Version = "v1",
                         Title = "Animated Spoon API V1",
                         Description = "A simple example ASP.NET Core Web API",
-                        TermsOfService = new Uri("https://example.com/terms"),
                         Contact = new OpenApiContact
                         {
-                            Name = "Shayne Boyer",
-                            Email = string.Empty,
-                            Url = new Uri("https://twitter.com/spboyer"),
+                            Name = "Michał Węglarz",
+                            Email = "weglarz.michal@outlook.com",
+                            Url = new Uri("https://github.com/morteify"),
                         },
-                        License = new OpenApiLicense
-                        {
-                            Name = "Use under LICX",
-                            Url = new Uri("https://example.com/license"),
-                        }
                     });
 
                     // Set the comments path for the Swagger JSON and UI.

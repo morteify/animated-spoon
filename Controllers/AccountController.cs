@@ -74,10 +74,10 @@ namespace animated_spoon.Controllers
             return View(loginModel);
         }
 
-        public async Task<RedirectResult> Logout()
+        public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return Redirect("/home");
+            return View("Views/Home/Index.cshtml");
         }
 
 

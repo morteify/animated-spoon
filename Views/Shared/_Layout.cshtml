@@ -45,12 +45,12 @@
                         </li>
                         @if (@User.Identity.Name != "Admin") {
                          <li class="nav-item">
-                            <a class="nav-link text-info" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            <a class="btn btn-outline-primary" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                         </li>
                         }
                         @if (@User.Identity.Name == "Admin") {
                             <li class="nav-item">
-                                <a class="nav-link text-primary" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
+                                <a class="btn btn-outline-secondary" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
                             </li>
                         }
                     </ul>

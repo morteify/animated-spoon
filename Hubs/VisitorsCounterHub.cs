@@ -8,6 +8,7 @@ namespace SignalRChat.Hubs
     {
 
         static int visitorsCount = 0;
+        static string connectionId = "";
         public async Task RegisterVisitorEntrance()
         {
             visitorsCount++;
@@ -15,13 +16,19 @@ namespace SignalRChat.Hubs
             await Clients.All.SendAsync("ReceiveVisitorEntrance", visitorsCount);
         }
 
-        // public async override Task OnDisconnectedAsync(Exception exception)
-        // {
-        //     visitorsCount--;
+        public override Task OnConnectedAsync()
+        {
+            connectionId = Context.ConnectionId;
+            return base.OnConnectedAsync();
+        }
 
-        //     await Clients.All.SendAsync("ReceiveVisitorEntrance", visitorsCount);
+        public async override Task OnDisconnectedAsync(Exception exception)
+        {
+            visitorsCount--;
 
-        //     return base.OnDisconnectedAsync(exception);
-        // }
+            await Clients.All.SendAsync("ReceiveVisitorEntrance", visitorsCount);
+
+            await base.OnDisconnectedAsync(exception);
+        }
     }
 }
